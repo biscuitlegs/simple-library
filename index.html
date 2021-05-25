@@ -8,19 +8,47 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <td>Title</td>
-                <td>Author</td>
-                <td>Pages</td>
-                <td>Read</td>
-            </tr>
-        </thead>
-        <tbody class="table-body">
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Pages</td>
+                    <td>Read</td>
+                </tr>
+            </thead>
+            <tbody class="table-body"></tbody>
+        </table>
 
-        </tbody>
-    </table>
+        <button class="new-book-button">New Book</button>
+        <form class="new-book-form invisible" action="">
+            <div class="control">
+                <label for="title">Title</label>
+                <input id="title" type="text">
+            </div>
+            <div class="control">
+                <label for="author">Author</label>
+                <input id="author" type="text">
+            </div>
+            <div class="control">
+                <label for="pages">Pages</label>
+                <input id="pages" type="number">
+            </div>
+            <div class="control">
+                <span>Read</span>
+                <div class="radio-buttons">
+                    <label for="read-true">True</label>
+                    <input class="read" id="read-true" type="radio" name="read" value="true">
+                    <label for="read-false">False</label>
+                    <input class="read" id="read-false" type="radio" name="read" value="false">
+                </div>
+            </div>
+            <div class="control">
+                <input class="add-book-button" type="submit" value="Add Book">
+            </div>
+        </form>
+    </main>
 </body>
 
     <script src="scripts/main.js"></script>
