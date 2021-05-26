@@ -8,24 +8,26 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.invertRead = function() {
+    this.read = !this.read;
+};
+
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     addBookToArray(newBook);
     addBookToTable(newBook);
 
-    //Grab all delete buttons and reset their data-book-index values correctly
-    deleteBookButtons = document.querySelectorAll('.delete-book-button');
-    deleteBookButtons.forEach((button, index) => button.dataset.bookIndex = index);
-
+    resetDeleteBookButtons();
     const newBookDeleteButton = deleteBookButtons[deleteBookButtons.length - 1];
-    newBookDeleteButton.addEventListener('click', (e) => {
-        const bookIndex = e.target.dataset.bookIndex;
-        removeBookFromTable(books[bookIndex]);
-        removeBookFromArray(books[bookIndex]);
-        deleteBookButtons = document.querySelectorAll('.delete-book-button');
-        deleteBookButtons.forEach((button, index) => button.dataset.bookIndex = index);
-    });
-    
+    newBookDeleteButton.addEventListener('click', removeBookFromLibrary);
+
+    resetInvertReadButtons();
+    const newInvertReadButton = invertReadButtons[invertReadButtons.length - 1];
+    newInvertReadButton.addEventListener('click', invertBookRead);
+}
+
+function addBookToArray(book) {
+    books.push(book);
 }
 
 function addBookToTable({ title, author, pages, read }) {
@@ -37,13 +39,20 @@ function addBookToTable({ title, author, pages, read }) {
                                     <td>${title}</td>
                                     <td>${author}</td>
                                     <td>${pages}</td>
-                                    <td>${read}</td>
+                                    <td>
+                                        <button class="invert-read-button" data-book-index=${books.length - 1}>&#8635;</button>
+                                        <span>${read}</span>
+                                    </td>
                                 </tr>`
                                 );
 }
 
-function addBookToArray(book) {
-    books.push(book);
+function removeBookFromLibrary(e) {
+    const bookIndex = e.target.dataset.bookIndex;
+    removeBookFromTable(books[bookIndex]);
+    removeBookFromArray(books[bookIndex]);
+    resetDeleteBookButtons();
+    resetInvertReadButtons();
 }
 
 function removeBookFromArray(book) {
@@ -55,10 +64,25 @@ function removeBookFromTable(book) {
     tableBody.removeChild(tableRow);
 }
 
-const books = [];
-const tableBody = document.querySelector('.table-body');
-let deleteBookButtons;
+function resetDeleteBookButtons() {
+    deleteBookButtons = document.querySelectorAll('.delete-book-button');
+    deleteBookButtons.forEach((button, index) => button.dataset.bookIndex = index);
+}
 
+function resetInvertReadButtons() {
+    invertReadButtons = document.querySelectorAll('.invert-read-button');
+    invertReadButtons.forEach((button, index) => button.dataset.bookIndex = index);
+}
+
+function invertBookRead(e) {
+    const bookIndex = e.target.dataset.bookIndex;
+    const book = books[bookIndex];
+    book.invertRead();
+    e.target.nextElementSibling.textContent = book.read;
+}
+
+
+const books = [];
 
 const newBookButton = document.querySelector('.new-book-button');
 const addBookButton = document.querySelector('.add-book-button');
@@ -67,9 +91,14 @@ const newBookFormTitle = document.querySelector('#title');
 const newBookFormAuthor = document.querySelector('#author');
 const newBookFormPages = document.querySelector('#pages');
 const newBookFormRead = document.querySelectorAll('.read');
+const tableBody = document.querySelector('.table-body');
+
+let deleteBookButtons;
+let invertReadButtons;
 
 
 newBookButton.addEventListener('click', () => newBookForm.classList.toggle('invisible'));
+
 addBookButton.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -81,5 +110,6 @@ addBookButton.addEventListener('click', (e) => {
     );
 });
 
-addBookToLibrary('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 250, true);
-addBookToLibrary('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 300, false);
+addBookToLibrary('Dracula', 'Bram Stoker', 418, false);
+addBookToLibrary('Frankenstein', 'Mary Shelley', 280, true);
+addBookToLibrary('The Republic', 'Plato', 472, true);
