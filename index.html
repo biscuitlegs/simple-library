@@ -5,13 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <main>
-        <table class="book-table">
+    <p class="alert alert-info text-center">
+        Like this project? Check it out on <a href="#">Github <i class="bi bi-github"></i></a>
+    </p>
+
+    <main class="bg-white border p-3">
+        <h1 class="text-center">Welcome to the Library</h1>
+
+        <table class="table book-table">
             <thead>
-                <tr>
+                <tr class="table-dark">
                     <td></td>
                     <td>Title</td>
                     <td>Author</td>
@@ -22,31 +31,27 @@
             <tbody class="table-body"></tbody>
         </table>
 
-        <button class="new-book-button">New Book</button>
-        <form class="new-book-form invisible" action="">
+        <button class="btn btn-primary new-book-button">New Book</button>
+
+        <form class=" border new-book-form invisible" action="">
             <div class="control">
-                <label for="title">Title</label>
-                <input id="title" type="text">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" id="title" type="text">
             </div>
             <div class="control">
-                <label for="author">Author</label>
-                <input id="author" type="text">
+                <label class="form-label" for="author">Author</label>
+                <input class="form-control" id="author" type="text">
             </div>
             <div class="control">
-                <label for="pages">Pages</label>
-                <input id="pages" type="number">
+                <label class="form-label" for="pages">Pages</label>
+                <input class="form-control" id="pages" type="number">
+            </div>
+            <div class="mt-2">
+                <label for="read">Read</label>
+                <input id="read" type="checkbox" name="read">
             </div>
             <div class="control">
-                <span>Read</span>
-                <div class="radio-buttons">
-                    <label for="read-true">True</label>
-                    <input class="read" id="read-true" type="radio" name="read" value="true">
-                    <label for="read-false">False</label>
-                    <input class="read" id="read-false" type="radio" name="read" value="false">
-                </div>
-            </div>
-            <div class="control">
-                <input class="add-book-button" type="submit" value="Add Book">
+                <input class="btn btn-success add-book-button" type="submit" value="Add Book">
             </div>
         </form>
     </main>

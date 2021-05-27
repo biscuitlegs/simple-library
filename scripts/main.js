@@ -34,13 +34,13 @@ function addBookToTable({ title, author, pages, read }) {
     tableBody.insertAdjacentHTML('beforeend',
                                 `<tr>
                                     <td>
-                                        <button class="delete-book-button" data-book-index=${books.length - 1}>&cross;</button>
+                                        <button class="btn btn-danger delete-book-button" data-book-index=${books.length - 1}>&cross;</button>
                                     </td>
                                     <td>${title}</td>
                                     <td>${author}</td>
                                     <td>${pages}</td>
                                     <td>
-                                        <button class="invert-read-button" data-book-index=${books.length - 1}>&#8635;</button>
+                                        <button class="btn btn-light invert-read-button" data-book-index=${books.length - 1}>&#8635;</button>
                                         <span>${read}</span>
                                     </td>
                                 </tr>`
@@ -90,7 +90,7 @@ const newBookForm = document.querySelector('.new-book-form');
 const newBookFormTitle = document.querySelector('#title');
 const newBookFormAuthor = document.querySelector('#author');
 const newBookFormPages = document.querySelector('#pages');
-const newBookFormRead = document.querySelectorAll('.read');
+const newBookFormRead = document.querySelector('#read');
 const tableBody = document.querySelector('.table-body');
 
 let deleteBookButtons;
@@ -106,7 +106,7 @@ addBookButton.addEventListener('click', (e) => {
         title.value,
         author.value,
         Number(pages.value),
-        newBookFormRead[0].checked ? Boolean(newBookFormRead[0].value) : !Boolean(newBookFormRead[0].value) //Change to checkbox
+        newBookFormRead.checked ? true : false
     );
 });
 
