@@ -1,16 +1,17 @@
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function() {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? 'already read' : 'not read yet'}.`
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    get info() {
+        return `${this._title} by ${this._author}, ${this._pages} pages, ${this._read ? 'already read' : 'not read yet'}.`;
+    }
+    invertRead() {
+        this._read = !this._read;
     }
 }
-
-Book.prototype.invertRead = function() {
-    this.read = !this.read;
-};
 
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
